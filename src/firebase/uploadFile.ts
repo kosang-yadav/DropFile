@@ -1,13 +1,13 @@
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import app from "./sdk";
 
-const upload = async (file : File) => {
+const upload = async (file : File,title : string) => {
 	// console.log(file);
 	// console.log(app);
 	// console.log("uploading function calls");
 	const storage = getStorage(app);
 	// console.log( "storage : ",storage);
-	const storageRef = ref(storage, "baka");
+	const storageRef = ref(storage, title);
 	// console.log( "storageRef : ",storageRef);
 
 	// 'file' comes from the Blob or File API

@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 export default function Upload() {
 	const [file, setFile] = useState<File | null>(null);
+	const [title, setTitle] = useState("");
 
 	const handleSubmit = async (event: { preventDefault: () => void }) => {
 		event.preventDefault();
@@ -24,7 +25,7 @@ export default function Upload() {
 		try {
 			// firebase upload function call
 
-			const response = await upload(file);
+			const response = await upload(file, title);
 
 			console.log(response?.metadata);
 			toast.dismiss(loading);
@@ -47,6 +48,17 @@ export default function Upload() {
 				className="p-6 bg-white rounded-lg shadow-md max-w-lg mx-auto"
 			>
 				<div className="mb-4">
+					Title : -
+					<input
+						type="text"
+						placeholder="Enter title"
+						value={title}
+						className="border-2 w-full p-1 mb-2"
+						onChange={(e) => {
+							setTitle(e.target.value);
+						}}
+					/>
+					<br />
 					<label
 						htmlFor="file"
 						className="block text-gray-700 font-medium mb-2"
