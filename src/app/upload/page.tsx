@@ -11,7 +11,7 @@ export default function Upload() {
 	const handleSubmit = async (event: { preventDefault: () => void }) => {
 		event.preventDefault();
 
-		console.log(file);
+		// console.log(file);
 
 		if (!file) {
 			toast.error("Please select a file to upload.");
@@ -25,9 +25,13 @@ export default function Upload() {
 		try {
 			// firebase upload function call
 
-			const response = await upload(file, title);
+			const response = await upload(
+				file,
+				title 
+				// + Math.floor(Math.random() * 100)
+			);
 
-			console.log(response?.metadata);
+			// console.log(response?.metadata);
 			toast.dismiss(loading);
 			toast.success("File uploaded successfully.");
 			setFile(null);
@@ -39,7 +43,7 @@ export default function Upload() {
 	};
 
 	return (
-		<section className="bg-white h-screen p-6 rounded-lg shadow mb-8">
+		<section className="bg-white h-screen p-6 rounded-lg shadow mb-8 text-black">
 			<h2 className="text-xl font-semibold text-gray-800 mb-4">
 				Upload a File To Transfer
 			</h2>
@@ -47,7 +51,7 @@ export default function Upload() {
 				onSubmit={handleSubmit}
 				className="p-6 bg-white rounded-lg shadow-md max-w-lg mx-auto"
 			>
-				<div className="mb-4">
+				<div className="mb-4 text-xl">
 					Title : -
 					<input
 						type="text"
