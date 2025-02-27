@@ -1,46 +1,56 @@
 "use client";
 
 import download from "@/firebase/downloadFile";
+import { useRouter } from "next/navigation";
+
 import { useState } from "react";
 import toast from "react-hot-toast";
+
+
 
 export default function Download() {
 	const [title, setTitle] = useState("");
 	const [url, setUrl] = useState("");
-	let url2 = "";
+
 
 	const handleSubmit = async (event: { preventDefault: () => void }) => {
 		event.preventDefault();
 
 		if (!title) {
-			toast.error("Please enter a title.");
+			toast.error("Please enter a title to fetch file.");
 			return;
 		}
 
 		const loading = toast.loading("Fetching...");
-
 		try {
-			// firebase URL
-			// const response  = await axios.post("/api/no-cors-request", { title });
 			const response = await download(title);
+			if(!response){
+				toast.dismiss(loading);
+				toast.error("File not found...");
+				return;
+			}
 			setUrl(response);
-			console.log(url)
-			console.log(response, typeof response);
-			url2 = response;
-
-			// setUrl(response);
-
-			console.log(url);
-			console.log(url2)
-
+			setTitle("");
 			toast.dismiss(loading);
-			toast.success("File fetched successfully.");
+			toast.success("File fetched successfully...");
+			return;
+
 		} catch (error) {
 			console.error("Error fetching file:", error);
+			setTitle("");
 			toast.dismiss(loading);
-			toast.error("Error fetching file.");
+			toast.error("failed to fetch the file...");
 		}
 	};
+
+	// const handleDownload = async (event: { preventDefault: () => void }) => {
+	// 	event.preventDefault();
+	// 	const yourArray = await download(title);
+	// 	console.log(yourArray);
+	// 	const response = await axios.post("/api/no-cors-request",{yourArray});
+	// 	console.log(response);
+	// 	setUrl(response.data.objectURL);
+	// };
 
 	return (
 		<section className="bg-white h-screen p-6 rounded-lg shadow mb-8 text-black">
@@ -48,10 +58,13 @@ export default function Download() {
 				Download a File to Transfer
 			</h2>
 			<form
-				onSubmit={handleSubmit}
+				onSubmit={
+					handleSubmit
+					// handleDownload
+				}
 				className="p-6 bg-white rounded-lg shadow-md max-w-lg mx-auto"
 			>
-				<div className="mb-4 text-xl">
+				{!url && <div className="mb-4 text-xl">
 					Title : -
 					<input
 						type="text"
@@ -62,56 +75,31 @@ export default function Download() {
 							setTitle(e.target.value);
 						}}
 					/>
-				</div>
+				</div>}
+				
 				{!url ? (
 					<div className="flex items-center justify-center">
 						<button
 							type={!url ? "submit" : "button"}
 							className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 "
 						>
-							Fetch
+							Fetch File
 						</button>
 					</div>
 				) : (
 					<div className="flex items-center justify-center">
-						{/* <a
+						<a
 							href={url}
 							target="_blank"
-							rel="noopener noreferrer"
-							className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-							download="baka"
-						> */}
-							{/* Get File */}
-						{/* </a> */}
-						{/* <button type="button" onClick={handleDownload}>
+							// rel="noopener noreferrer"
+							className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+							download
+						>
 							Get File
-						</button> */}
-						<img src={url2} alt="baka" />
+						</a>
 					</div>
 				)}
-			</form>	
-			{/* {Array.isArray(files) && files?.length > 0 && (
-				<div className="flex items-center justify-center">Baka...</div>
-			)} */}
-			<div className="flex items-center justify-center">
-				{/* <a
-					href="https://www.shutterstock.com/shutterstock/photos/1344894344/display_1500/stock-vector-north-arrow-simple-logo-1344894344.jpg"
-					target="_blank"
-					// rel="noopener noreferrer"
-					className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-					download="baka"
-				> */}
-					{/* <img
-						src="https://www.shutterstock.com/shutterstock/photos/1344894344/display_1500/stock-vector-north-arrow-simple-logo-1344894344.jpg"
-						// height={"100px"}
-						width={"400px"}
-						alt="baka"
-					/> */}
-				{/* </a> */}
-				{/* <button type="button" onClick={handleDownload}>
-							Get File
-						</button> */}
-			</div>
+			</form>
 		</section>
 	);
 }

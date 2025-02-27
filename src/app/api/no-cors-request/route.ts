@@ -3,26 +3,24 @@ import download from "@/firebase/downloadFile";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req : NextRequest, res : NextResponse) {
-	const {title} : {title : string} = await req.json();
+	const {yourArray} = await req.json();
 	try {
-		// const response = await axios.get(url, { responseType: "stream" }); // Fetch the file as a stream
 
-        // const newHeaders = new Headers(req.headers);
-		// 		// Add a new header
-		// newHeaders.set("Content-Type", "application/octet-stream");
+		// const link = document.createElement("a");
+		// link.style.display = "none";
+		// document.body.appendChild(link);
 
-		// newHeaders.set("Content-Disposition", 'attachment; filename="baka"'); // Set the file name
-		
-		// response.data.pipe(res); // Pipe the file stream to the response
+		const blob = new Blob([yourArray], { type: "text/plain" });
+		const objectURL = URL.createObjectURL(blob);
 
-        const url = await download(title);
-        // res.json({ url });
-        console.log("from api",url);
+		// link.href = objectURL;
+		// link.href = URL.createObjectURL(blob);
+		// link.download = "data";
+		// link.click();
 
-        const blob = new Blob([url], { type: "application/octet-stream" });
-        const blobUrl = URL.createObjectURL(blob);
-
-        return NextResponse.json({ url : blobUrl });
+		return NextResponse.json({
+			objectURL,
+		});
 
 	} catch (error) {
 		console.error("Error downloading file:", error);

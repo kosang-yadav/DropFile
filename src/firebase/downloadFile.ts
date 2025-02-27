@@ -35,8 +35,7 @@ const download = async (title : string) => {
 
 	// return  await getBytes(starsRef).then((snapshot) => {
 	// 	console.log("from firebase", snapshot);
-	// 	return snapshot;
-		
+	// 	return snapshot;	
 	// })
 
 	// returning a function that's itself returning a string, try removing top return and see in download/page.tsx
