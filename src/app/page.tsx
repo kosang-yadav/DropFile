@@ -100,7 +100,7 @@ export default function Home() {
 
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 text-gray-800">
       <h1 className="text-6xl font-bold m-4">DropFile</h1>
-      <div className="p-4">
+      <div className="p-4 flex sm:flex-row flex-col items-center gap-6">
         <Link href="/upload"><button className=" text-2xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg mx-4">Upload File</button></Link>
         <Link href="/download"><button className=" text-2xl bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg mx-4">Download File</button></Link>
       </div>

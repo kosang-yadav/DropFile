@@ -63,64 +63,66 @@ export default function Upload() {
 	//16 MB - 37 secs / 2 mins 30 secs
 
 	return (
-		<section className="bg-white h-screen p-6 rounded-lg shadow mb-8 text-black">
-			<h2 className="text-xl font-semibold text-gray-800 mb-4">
-				Upload a File To Transfer
-			</h2>
-			<form
-				onSubmit={handleSubmit}
-				className="p-6 bg-white rounded-lg shadow-md max-w-lg mx-auto"
-			>
-				<div className="mb-4 text-xl">
-					Title : -
-					<input
-						type="text"
-						placeholder="Enter title"
-						value={title}
-						className="border-2 w-full p-1 mb-2"
-						onChange={(e) => {
-							setTitle(e.target.value);
-						}}
-					/>
-					<br />
-					<label
-						htmlFor="file"
-						className="block text-gray-700 font-medium mb-2"
-					>
-						Select a file:
-					</label>
-					<input
-						type="file"
-						id="file"
-						name="file"
-						onChange={(e) => {
-							if (e.target.files && e.target?.files?.length > 0) {
-								setFile(e.target?.files?.[0]);
-							}
-						}}
-						accept=".pdf,.jpg,.jpeg,.png,.mp3,.mp4"
-						className="block w-full text-gray-700 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-					/>
-				</div>
-				{!uploading ? (
-					totalTime ? (
-						<div className="text-center text-xl my-4">
-							{" "}
-							Uploading Time : {totalTime}
-						</div>
-					) : (
-						<div></div>
-					)
-				) : (
-					<div className="text-center text-xl my-4 baka">Uploading...</div>
-				)}
-				<button
-					type="submit"
-					className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+		<section className="bg-white h-screen flex items-center justify-center ">
+			<div className="p-6 rounded-lg shadow mb-8 text-black ">
+				<h2 className="text-xl font-semibold text-gray-800 mb-4">
+					Upload a File To Transfer
+				</h2>
+				<form
+					onSubmit={handleSubmit}
+					className="p-6 bg-white rounded-lg shadow-md max-w-lg mx-auto"
 				>
-					Upload
-				</button>
-			</form>
+					<div className="mb-4 text-xl">
+						Title : -
+						<input
+							type="text"
+							placeholder="Enter title"
+							value={title}
+							className="border-2 w-full p-1 mb-2"
+							onChange={(e) => {
+								setTitle(e.target.value);
+							}}
+						/>
+						<br />
+						<label
+							htmlFor="file"
+							className="block text-gray-700 font-medium mb-2"
+						>
+							Select a file:
+						</label>
+						<input
+							type="file"
+							id="file"
+							name="file"
+							onChange={(e) => {
+								if (e.target.files && e.target?.files?.length > 0) {
+									setFile(e.target?.files?.[0]);
+								}
+							}}
+							accept=".pdf,.jpg,.jpeg,.png,.mp3,.mp4"
+							className="block w-full text-gray-700 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+						/>
+					</div>
+					{!uploading ? (
+						totalTime ? (
+							<div className="text-center text-xl my-4">
+								{" "}
+								Uploading Time : {totalTime}
+							</div>
+						) : (
+							<div></div>
+						)
+					) : (
+						<div className="text-center text-xl my-4 baka">Uploading...</div>
+					)}
+					<button
+						type="submit"
+						className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+					>
+						Upload
+					</button>
+				</form>
+			</div>
 		</section>
 	);
 }
