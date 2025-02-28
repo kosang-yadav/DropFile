@@ -32,7 +32,7 @@ export default function Upload() {
 			let time = new Date().getTime();
 
 			// firebase upload function call
-			const response = await upload(
+			await upload(
 				file,
 				title
 				// + Math.floor(Math.random() * 100)

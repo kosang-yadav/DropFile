@@ -1,7 +1,8 @@
-import { error } from "console";
 import app from "./sdk";
-import { getStorage, ref, getDownloadURL, getBlob, getBytes } from "firebase/storage";
-import axios from "axios";
+import { getStorage, ref, getDownloadURL,
+	// getBlob,
+	// getBytes
+ } from "firebase/storage";
 
 const download = async (title : string) => {
 	// Create a reference to the file we want to download
