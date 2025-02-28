@@ -42,4 +42,4 @@ next-env.d.ts
 src/app/api
 src/app/api/allow-cors-request
 src/app/api/no-cors-request/route.ts
-src/app/api/no-cors-request/route.ts
+api
